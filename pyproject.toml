@@ -1,6 +1,6 @@
 [project]
 name = "multi-agent-rag-customer-support"
 version = "0.1.0"
-ECHO is on.
+
 [tool.vercel]
 entrypoint = "api:app"
