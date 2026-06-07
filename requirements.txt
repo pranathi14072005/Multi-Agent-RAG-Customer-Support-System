@@ -23,3 +23,5 @@ beautifulsoup4>=4.12.0
 
 # Utilities
 psutil>=5.9.0
+fastapi
+uvicorn
