@@ -1,7 +1,10 @@
 [project]
 name = "multi-agent-rag-customer-support"
 version = "0.1.0"
-dependencies = []
+dependencies = [
+    "fastapi",
+    "uvicorn"
+]
 
 [tool.vercel]
 entrypoint = "api:app"
