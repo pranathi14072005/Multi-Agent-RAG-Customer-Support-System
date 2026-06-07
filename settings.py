@@ -31,7 +31,10 @@ class Settings:
 
     # ── Vector Store (ChromaDB) ────────────────────────────────────────
     chroma_persist_dir: str = field(
-        default_factory=lambda: os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
+        default_factory=lambda: os.getenv(
+            "CHROMA_PERSIST_DIR",
+            "/tmp/chroma_db" if (os.getenv("VERCEL") == "1" or os.getenv("VERCEL_ENV") is not None) else "./chroma_db"
+        )
     )
     chroma_kb_collection: str = field(
         default_factory=lambda: os.getenv("CHROMA_KB_COLLECTION", "knowledge_base")
@@ -63,7 +66,10 @@ class Settings:
 
     # ── Ticket / KB Management ─────────────────────────────────────────
     ticket_db_path: str = field(
-        default_factory=lambda: os.getenv("TICKET_DB_PATH", "./tickets.db")
+        default_factory=lambda: os.getenv(
+            "TICKET_DB_PATH",
+            "/tmp/tickets.db" if (os.getenv("VERCEL") == "1" or os.getenv("VERCEL_ENV") is not None) else "./tickets.db"
+        )
     )
     kb_source_dir: str = field(
         default_factory=lambda: os.getenv("KB_SOURCE_DIR", "./kb_sources")
