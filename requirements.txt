@@ -12,8 +12,6 @@ langchain-text-splitters>=0.2.0
 chromadb>=0.5.0
 
 # Embeddings / document loading
-sentence-transformers>=2.7.0
-unstructured>=0.14.0
 pypdf>=4.0.0
 tiktoken>=0.7.0
 

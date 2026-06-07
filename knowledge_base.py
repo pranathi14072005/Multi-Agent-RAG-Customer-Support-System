@@ -23,7 +23,6 @@ from pathlib import Path
 from typing import Optional
 
 from langchain_community.document_loaders import (
-    DirectoryLoader,
     PyPDFLoader,
     TextLoader,
     WebBaseLoader,
@@ -271,7 +270,21 @@ class KnowledgeBase:
     @staticmethod
     def _load_source(source: str) -> list[Document]:
         if os.path.isdir(source):
-            return DirectoryLoader(source, glob="**/*.{pdf,txt,md}", show_progress=False).load()
+            docs = []
+            for root, _, files in os.walk(source):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    if file.endswith((".txt", ".md")):
+                        try:
+                            docs.extend(TextLoader(file_path, encoding="utf-8").load())
+                        except Exception as e:
+                            logger.warning("Failed to load %s: %s", file_path, e)
+                    elif file.endswith(".pdf"):
+                        try:
+                            docs.extend(PyPDFLoader(file_path).load())
+                        except Exception as e:
+                            logger.warning("Failed to load %s: %s", file_path, e)
+            return docs
         elif source.endswith(".pdf"):
             return PyPDFLoader(source).load()
         else:
