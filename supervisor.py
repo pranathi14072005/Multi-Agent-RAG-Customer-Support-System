@@ -31,17 +31,17 @@ import logging
 from datetime import datetime
 from typing import Optional
 
-from .agents import (
+from agents import (
     EscalationAgent, IntakeAgent, KBManagerAgent,
     Tier1Agent, Tier2Agent,
 )
-from .kb import KnowledgeBase
-from .memory import SessionMemory, TicketStore
-from .models import (
+from kb import KnowledgeBase
+from memory import SessionMemory, TicketStore
+from models import (
     AgentResponse, AgentTier, EscalationReason,
     SupportCategory, SupportTicket, TicketPriority, TicketStatus,
 )
-from .settings import Settings
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 
