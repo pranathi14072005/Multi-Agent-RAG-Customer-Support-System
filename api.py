@@ -171,6 +171,16 @@ def _build_message_response(response_text: str, ticket) -> MessageResponse:
 
 # ── Endpoints ──────────────────────────────────────────────────────────────────
 
+@app.get("/", tags=["System"])
+async def root():
+    """Welcome root endpoint."""
+    return {
+        "message": "Welcome to the Multi-Agent RAG Customer Support API",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
+
 @app.get("/health", tags=["System"])
 async def health_check():
     """Check system health and KB status."""
