@@ -21,10 +21,10 @@ from typing import Optional
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
 
-from ..kb import KnowledgeBase
-from ..models import KBDocument, SupportCategory, SupportTicket
-from ..prompts import KB_GAP_PROMPT, KB_UPDATE_PROMPT
-from ..settings import Settings
+from knowledge_base import KnowledgeBase
+from models import KBDocument, SupportCategory, SupportTicket
+from agent_prompts import KB_GAP_PROMPT, KB_UPDATE_PROMPT
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 

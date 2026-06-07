@@ -31,12 +31,14 @@ import logging
 from datetime import datetime
 from typing import Optional
 
-from agents import (
-    EscalationAgent, IntakeAgent, KBManagerAgent,
-    Tier1Agent, Tier2Agent,
-)
-from kb import KnowledgeBase
-from memory import SessionMemory, TicketStore
+from intake_agent import IntakeAgent
+from tier1_agent import Tier1Agent
+from tier2_agent import Tier2Agent
+from escalation_agent import EscalationAgent
+from kb_manager_agent import KBManagerAgent
+from knowledge_base import KnowledgeBase
+from session_memory import SessionMemory
+from ticket_store import TicketStore
 from models import (
     AgentResponse, AgentTier, EscalationReason,
     SupportCategory, SupportTicket, TicketPriority, TicketStatus,

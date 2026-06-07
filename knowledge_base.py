@@ -33,8 +33,8 @@ from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from ..models import KBDocument, SupportCategory, SupportTicket
-from ..settings import Settings
+from models import KBDocument, SupportCategory, SupportTicket
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 

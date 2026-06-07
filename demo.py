@@ -21,7 +21,9 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
 )
 
-from multi_agent_rag_support import Supervisor, Settings, SupportCategory
+from supervisor import Supervisor
+from settings import Settings
+from models import SupportCategory
 
 
 def banner(text: str) -> None:

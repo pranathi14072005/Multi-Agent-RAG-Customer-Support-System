@@ -20,12 +20,12 @@ from typing import Optional
 
 from langchain_ollama import ChatOllama
 
-from ..models import (
+from models import (
     AgentResponse, AgentTier, EscalationReason, RoutingDecision,
     SupportCategory, SupportTicket, TicketPriority,
 )
-from ..prompts import INTAKE_PROMPT
-from ..settings import Settings
+from agent_prompts import INTAKE_PROMPT
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 

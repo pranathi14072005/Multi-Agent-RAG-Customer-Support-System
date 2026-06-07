@@ -19,9 +19,9 @@ import sys
 logging.basicConfig(level=logging.WARNING,
                     format="%(asctime)s [%(levelname)s] %(name)s — %(message)s")
 
-from .supervisor import Supervisor
-from .models import SupportCategory, TicketStatus
-from .settings import Settings
+from supervisor import Supervisor
+from models import SupportCategory, TicketStatus
+from settings import Settings
 
 
 # ── ANSI colours ───────────────────────────────────────────────────────────────

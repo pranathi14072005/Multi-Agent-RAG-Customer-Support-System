@@ -22,13 +22,13 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_ollama import ChatOllama
 
-from ..kb import KnowledgeBase
-from ..models import (
+from knowledge_base import KnowledgeBase
+from models import (
     AgentResponse, AgentTier, EscalationReason,
     SupportCategory, SupportTicket,
 )
-from ..prompts import TIER1_PROMPT, CONFIDENCE_PROMPT
-from ..settings import Settings
+from agent_prompts import TIER1_PROMPT, CONFIDENCE_PROMPT
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 

@@ -12,8 +12,8 @@ import time
 from dataclasses import dataclass, field
 from typing import Optional
 
-from ..models import SupportTicket, AgentTier
-from ..settings import Settings
+from models import SupportTicket, AgentTier
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 

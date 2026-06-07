@@ -19,16 +19,16 @@ from typing import Optional
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
 
-from ..kb import KnowledgeBase
-from ..models import (
+from knowledge_base import KnowledgeBase
+from models import (
     AgentResponse, AgentTier, EscalationReason,
     SupportCategory, SupportTicket,
 )
-from ..prompts import (
+from agent_prompts import (
     TIER2_PROMPT,
     TIER2_BILLING_SYSTEM, TIER2_TECHNICAL_SYSTEM, TIER2_ACCOUNT_SYSTEM,
 )
-from ..settings import Settings
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 

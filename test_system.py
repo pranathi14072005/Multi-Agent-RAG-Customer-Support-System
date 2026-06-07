@@ -23,15 +23,15 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from multi_agent_rag_support.models import (
+from models import (
     AgentResponse, AgentTier, EscalationReason,
     KBDocument, Message, RoutingDecision,
     SupportCategory, SupportTicket,
     TicketPriority, TicketStatus,
 )
-from multi_agent_rag_support.memory.ticket_store import TicketStore
-from multi_agent_rag_support.memory.session_memory import SessionMemory
-from multi_agent_rag_support.settings import Settings
+from ticket_store import TicketStore
+from session_memory import SessionMemory
+from settings import Settings
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -316,15 +316,15 @@ class TestSessionMemory(unittest.TestCase):
 class TestIntakeAgent(unittest.TestCase):
 
     def _make_agent(self):
-        from multi_agent_rag_support.agents.intake_agent import IntakeAgent
-        with patch("multi_agent_rag_support.agents.intake_agent.ChatOllama"):
+        from intake_agent import IntakeAgent
+        with patch("intake_agent.ChatOllama"):
             agent = IntakeAgent()
         return agent
 
     def test_critical_keyword_triggers_escalation(self):
-        from multi_agent_rag_support.agents.intake_agent import IntakeAgent
-        from multi_agent_rag_support.models import AgentTier
-        with patch("multi_agent_rag_support.agents.intake_agent.ChatOllama"):
+        from intake_agent import IntakeAgent
+        from models import AgentTier
+        with patch("intake_agent.ChatOllama"):
             agent = IntakeAgent()
         t = make_ticket()
         t.messages[0] = Message(role="user", content="There's been a data breach on my account!")
@@ -333,8 +333,8 @@ class TestIntakeAgent(unittest.TestCase):
         self.assertEqual(decision.priority, TicketPriority.CRITICAL)
 
     def test_fallback_billing_classification(self):
-        from multi_agent_rag_support.agents.intake_agent import IntakeAgent
-        with patch("multi_agent_rag_support.agents.intake_agent.ChatOllama") as mock_llama:
+        from intake_agent import IntakeAgent
+        with patch("intake_agent.ChatOllama") as mock_llama:
             mock_llm = MagicMock()
             mock_llm.invoke.side_effect = Exception("LLM unavailable")
             mock_llama.return_value = mock_llm
@@ -347,8 +347,8 @@ class TestIntakeAgent(unittest.TestCase):
         self.assertTrue(decision.metadata.get("fallback"))
 
     def test_fallback_technical_classification(self):
-        from multi_agent_rag_support.agents.intake_agent import IntakeAgent
-        with patch("multi_agent_rag_support.agents.intake_agent.ChatOllama") as mock_llama:
+        from intake_agent import IntakeAgent
+        with patch("intake_agent.ChatOllama") as mock_llama:
             mock_llm = MagicMock()
             mock_llm.invoke.side_effect = Exception("unavailable")
             mock_llama.return_value = mock_llm
@@ -360,23 +360,23 @@ class TestIntakeAgent(unittest.TestCase):
         self.assertEqual(decision.category, SupportCategory.TECHNICAL)
 
     def test_json_parsing_strips_markdown(self):
-        from multi_agent_rag_support.agents.intake_agent import IntakeAgent
-        with patch("multi_agent_rag_support.agents.intake_agent.ChatOllama"):
+        from intake_agent import IntakeAgent
+        with patch("intake_agent.ChatOllama"):
             agent = IntakeAgent()
         raw = '```json\n{"category": "billing", "priority": "high", "requires_rag": true, "sentiment_score": -0.2, "tags": [], "subject": "Test", "reason": "billing issue"}\n```'
         result = agent._parse_llm_output(raw)
         self.assertEqual(result["category"], "billing")
 
     def test_user_wants_human_detection(self):
-        from multi_agent_rag_support.supervisor import Supervisor
-        with patch("multi_agent_rag_support.supervisor.KnowledgeBase"), \
-             patch("multi_agent_rag_support.supervisor.TicketStore"), \
-             patch("multi_agent_rag_support.supervisor.SessionMemory"), \
-             patch("multi_agent_rag_support.supervisor.IntakeAgent"), \
-             patch("multi_agent_rag_support.supervisor.Tier1Agent"), \
-             patch("multi_agent_rag_support.supervisor.Tier2Agent"), \
-             patch("multi_agent_rag_support.supervisor.EscalationAgent"), \
-             patch("multi_agent_rag_support.supervisor.KBManagerAgent"):
+        from supervisor import Supervisor
+        with patch("supervisor.KnowledgeBase"), \
+             patch("supervisor.TicketStore"), \
+             patch("supervisor.SessionMemory"), \
+             patch("supervisor.IntakeAgent"), \
+             patch("supervisor.Tier1Agent"), \
+             patch("supervisor.Tier2Agent"), \
+             patch("supervisor.EscalationAgent"), \
+             patch("supervisor.KBManagerAgent"):
             sv = Supervisor()
         self.assertTrue(sv._user_wants_human("I want to speak to a human agent"))
         self.assertTrue(sv._user_wants_human("Can I talk to a real person?"))

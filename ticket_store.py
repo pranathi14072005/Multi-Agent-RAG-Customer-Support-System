@@ -14,11 +14,11 @@ from contextlib import contextmanager
 from datetime import datetime, timedelta
 from typing import Optional
 
-from ..models import (
+from models import (
     SupportTicket, Message, SupportCategory, TicketStatus,
     TicketPriority, AgentTier, EscalationReason,
 )
-from ..settings import Settings
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 

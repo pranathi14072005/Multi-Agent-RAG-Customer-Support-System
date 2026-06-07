@@ -19,12 +19,12 @@ from typing import Optional
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama import ChatOllama
 
-from ..models import (
+from models import (
     AgentResponse, AgentTier, EscalationReason,
     SupportTicket, TicketStatus,
 )
-from ..prompts import ESCALATION_PROMPT
-from ..settings import Settings
+from agent_prompts import ESCALATION_PROMPT
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 
