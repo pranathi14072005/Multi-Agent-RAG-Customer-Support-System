@@ -34,11 +34,11 @@ from fastapi import FastAPI, HTTPException, UploadFile, File, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr, Field
 
-from .supervisor import Supervisor
-from .models import (
+from supervisor import Supervisor
+from models import (
     SupportCategory, TicketStatus, TicketPriority, AgentTier,
 )
-from .settings import Settings
+from settings import Settings
 
 logger = logging.getLogger(__name__)
 
