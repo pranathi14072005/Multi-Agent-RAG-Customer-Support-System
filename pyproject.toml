@@ -4,6 +4,7 @@ version = "0.1.0"
 dependencies = [
     "fastapi",
     "uvicorn",
+    "python-multipart",
     "langchain>=0.2.0",
     "langchain-core>=0.2.0",
     "langchain-community>=0.2.0",
